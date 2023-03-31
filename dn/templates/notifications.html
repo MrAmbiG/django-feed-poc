@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="mx-auto card rounded" style="width:61rem;">
+    <div>
+        <div class="card-header">
+            <div class="d-flex justify-content-start">
+                <div class="flex-grow-1"><strong>{{ pk }}</strong></div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
+        </div>
+        <table class="table table-sm table-hover">
+            <tbody>
+            {% for n in notifications %}
+                {% with notification_id=n.id %}
+                <tr id="notification_{{ n.id }}">
+                    {% if not n.is_read %}
+                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
+                        &#x2022;&nbsp;{{ n.notification.notification }}
+                    </td>
+                    {% else %}
+                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
+                        {{ n.notification.notification }}
+                    </td>
+                    {% endif %}
+                    <td width="11%" style="word-break: break-all; padding-left: 10px;">{{ n.user }}</td>
+                    <td width="5%">
+                    <button class="btn btn-outline-light text-dark border-0" onclick="mark_notification_as_read('{{ request.user.pk }}', '{{ n.id }}', this)" title="Done">
+                    <img src="{% static 'icons/check.svg' %}" width="21" height="21" />
+                    </button>
+                    </td>
+                </tr>
+                {% endwith %}
+            {% endfor %}
+
+            {% for n in system_notifications %}
+                {% with notification_id=n.id %}
+                <tr id="notification_{{ n.id }}">
+                    {% if not n.is_read %}
+                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
+                        &#x2022;&nbsp;{{ n.notification }}
+                    </td>
+                    {% else %}
+                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
+                        {{ n.notification }}
+                    </td>
+                    {% endif %}
+                    <td width="11%" style="word-break: break-all; padding-left: 10px;">{{ n.user }}</td>
+                    <td width="5%">
+                    <button class="btn btn-outline-light text-dark border-0" onclick="mark_system_notification_as_read('{{ request.user.pk }}', '{{ n.id }}', this)" title="Done">
+                    <img src="{% static 'icons/check.svg' %}" width="21" height="21" />
+                    </button>
+                    </td>
+                </tr>
+                {% endwith %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script>
+    function mark_notification_as_read(user_pk, notification_id, button) {
+        $.ajax({
+            url: "http://{{ request.get_host }}/{{ user.username }}/inbox/notifications/" + notification_id + "/read/",
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                $(button).parents('tr').hide();
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+
+    function mark_system_notification_as_read(user_pk, notification_id, button) {
+        $.ajax({
+            url: "http://{{ request.get_host }}/{{ user.username }}/inbox/notifications/system/" + notification_id + "/read/",
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                console.log(response);
+                $(button).parents('tr').hide();
+            },
+            error: function(xhr) {
+                console.log(xhr.responseText);
+            }
+        });
+    }
+</script>
+
+{% endblock content %}

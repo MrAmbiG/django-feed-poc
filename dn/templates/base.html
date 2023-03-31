@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% load i18n %}
+{% load account socialaccount %}
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    {% block fonts %}
+    {% endblock fonts %}
+    {% block style %}
+    {% endblock style %}
+    <title>
+        {% block title %}
+        hello
+        {% endblock title %}
+    </title>
+    {% block css %}
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <!-- Bootstrap 5.2 CSS JavaScript Bundle with Popper -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Project CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/text.css' %}">
+    {% endblock css %}
+</head>
+
+
+<body class="bg-light">
+    {% include 'navbar.html' %}
+    {% block content %}
+
+    {% endblock content %}
+    {% block javascript %}
+    <!-- htmx -->
+    {% comment %} <script src="{% static '/js/htmx.min.js' %}" defer></script> {% endcomment %}
+    <script src="https://unpkg.com/htmx.org@1.8.0"></script>
+    <!-- bootstrap 5.2 js -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
+
+    {% endblock javascript %}
+
+    {% block localjs %}
+
+    {% endblock localjs %}
+    <script>
+        document.body.addEventListener('htmx:configRequest', (event) => {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        })
+    </script>
+</body>
+
+</html>

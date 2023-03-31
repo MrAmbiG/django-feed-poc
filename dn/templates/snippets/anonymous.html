@@ -1,0 +1,10 @@
+{% if user.is_anonymous %}
+<div class="row border border-0">
+   <div class="col">
+      <a href="/accounts/login" class="primaryAction shadow btn btn-sm border-success btn-light btn-c">Sign In</a>
+      <!-- </div>
+   <div class="col"> -->
+      <a href="/accounts/signup" class="primaryAction shadow btn btn-sm border-success btn-light btn-c">Sign Up</a>
+   </div>
+</div>
+{% endif %}

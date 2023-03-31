@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Welcome{% endblock title %}
+{% block content %}
+<div class="card mx-auto p-3 mb-5 bg-light rounded text-center" style="max-width: 31rem;">
+    <div class="jumbotron">
+        <h1>Welcome!</h1>
+        <a href="accounts/login" class="btn shadow btn-sm border-secondary btn-light btn-c">Sign In</a>
+        <a href="accounts/signup" class="btn shadow btn-sm border-secondary btn-light btn-c">Sign Up</a>
+        <br><br>
+    </div>
+</div>
+{% endblock content %}

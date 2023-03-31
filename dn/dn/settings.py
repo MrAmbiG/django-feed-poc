@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from config import *
 from pathlib import Path
 
@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-5$k#1$#jz=8(a*=&-m(99u2eg=ejs4g=b@-g5ipqps^q929a-1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -38,6 +38,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # modules
+    "django.contrib.sites",
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "crispy_forms",
+    "crispy_bootstrap5",
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -55,7 +63,12 @@ ROOT_URLCONF = "dn.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [
+            os.path.join(BASE_DIR, "templates"),
+            os.path.join(BASE_DIR, "templates", "allauth"),
+            os.path.join(BASE_DIR, "templates", "pages"),
+            os.path.join(BASE_DIR, "templates", "snippets"),
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -125,3 +138,9 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+CRISPY_TEMPLATE_PACK="bootstrap5"
+# django allauth settings
+SITE_ID=1
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+LOGIN_REDIRECT_URL = "profile"
+ACCOUNT_LOGOUT_ON_GET = True

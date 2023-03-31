@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<style>
+.carousel-item {
+  border: none;
+}
+</style>
+<br>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-auto">
+        <div class="card rounded" style="width:51rem;">
+            <div>
+                <table class="table table-sm table-striped table-hover">
+                    <tbody>
+                        <tr>
+                            <td width="21%">
+                                user: {{ pk}}
+                            </td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
