@@ -1,0 +1,5 @@
+PG_NAME='eeguuaqq'
+PG_USER='eeguuaqq'
+PG_PASSWORD='U6FE-K48f-wu5BFU3RK8HM3esOjVT8Nh'
+PG_HOST='satao.db.elephantsql.com'
+PG_PORT=''
