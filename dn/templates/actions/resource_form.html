@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+
+<div class="mx-auto card bg-light rounded" style="width:51rem;">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-sm border-secondary btn-light btn-c" type="submit" value="Save">
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

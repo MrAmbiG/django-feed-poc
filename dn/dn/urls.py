@@ -30,5 +30,6 @@ urlpatterns = [
     path("", core_views.welcome, name="welcome"),
     path("profile/", core_views.profile, name="profile"),
     path("<slug:pk>/", core_views.rprofile, name="rprofile"),
+    path("actions/", include("actions.urls")),
 
 ]

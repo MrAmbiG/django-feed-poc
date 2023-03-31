@@ -5,7 +5,7 @@ from django.contrib.sites.models import Site
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from config import *
-
+from actions.views import resourceList
 
 
 
@@ -27,6 +27,7 @@ def profile(request):
 def rprofile(request, pk):
     context = {
         "pk": pk,
+        'resources': resourceList(request, pk)
     }
     return render(request, "profile.html", context)
 
