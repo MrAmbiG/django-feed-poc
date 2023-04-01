@@ -18,6 +18,8 @@ def handler500(request, *args, **kwargs):
 
 
 def welcome(request):
+    if request.user.is_authenticated:
+        return redirect("profile")
     return render(request, "welcome.html")
 
 @login_required

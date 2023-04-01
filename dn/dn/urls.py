@@ -31,5 +31,5 @@ urlpatterns = [
     path("profile/", core_views.profile, name="profile"),
     path("<slug:pk>/", core_views.rprofile, name="rprofile"),
     path("actions/", include("actions.urls")),
-
+    path("inbox/", include("inbox.urls")),
 ]
