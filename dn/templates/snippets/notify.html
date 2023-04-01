@@ -1,37 +1,9 @@
 {% load static %}
-<div class="row border border-0">
-    <div class="mt-2">
-        <a href="{% url 'notificiations_view' pk=request.user %}">
-            {% if notificationCount > 0 %}
-            <img id="notification-icon" src="{% static 'icons/bell_red.svg' %}" width="21" height="21">
-            <span id="notification-count">{{ notificationCount }}</span>
-            {% else %}
-            <img id="notification-icon" src="{% static 'icons/bell.svg' %}" width="21" height="21">
-            {% endif %}
-        </a>
-    </div>
-</div>
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
+{% if unread_count %}
+    <i class="fa-solid fa-bell" style="color: #db6424;"></i>
+{% else %}
+    <i class="fa-regular fa-bell"></i>
+{% endif %}
 
-<script>
-function updateNotificationCount() {
-    $.ajax({
-        url: "{% url 'notification_count' pk=request.user %}",
-        type: "GET",
-        dataType: "json",
-        success: function(response) {
-            var count = parseInt(response.count);
-            var countSpan = $("#notification-count");
-            var icon = $("#notification-icon");
-            countSpan.text(count.toString());
-            if (count > 0) {
-                icon.attr("src", "{% static 'icons/bell_red.svg' %}");
-            } else {
-                icon.attr("src", "{% static 'icons/bell.svg' %}");
-            }
-        }
-    });
-}
-
-updateNotificationCount(); // call the function initially
-setInterval(updateNotificationCount, 210000); // call the function every 21 seconds
-</script>

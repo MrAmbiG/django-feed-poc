@@ -11,49 +11,19 @@
         </div>
         <table class="table table-sm table-hover">
             <tbody>
-            {% for n in notifications %}
-                {% with notification_id=n.id %}
-                <tr id="notification_{{ n.id }}">
-                    {% if not n.is_read %}
-                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
-                        &#x2022;&nbsp;{{ n.notification.notification }}
-                    </td>
-                    {% else %}
-                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
-                        {{ n.notification.notification }}
-                    </td>
-                    {% endif %}
-                    <td width="11%" style="word-break: break-all; padding-left: 10px;">{{ n.user }}</td>
-                    <td width="5%">
-                    <button class="btn btn-outline-light text-dark border-0" onclick="mark_notification_as_read('{{ request.user.pk }}', '{{ n.id }}', this)" title="Done">
-                    <img src="{% static 'icons/check.svg' %}" width="21" height="21" />
-                    </button>
-                    </td>
-                </tr>
-                {% endwith %}
-            {% endfor %}
-
-            {% for n in system_notifications %}
-                {% with notification_id=n.id %}
-                <tr id="notification_{{ n.id }}">
-                    {% if not n.is_read %}
-                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
-                        &#x2022;&nbsp;{{ n.notification }}
-                    </td>
-                    {% else %}
-                    <td width="71%" style="word-break: break-all; padding-left: 10px;">
-                        {{ n.notification }}
-                    </td>
-                    {% endif %}
-                    <td width="11%" style="word-break: break-all; padding-left: 10px;">{{ n.user }}</td>
-                    <td width="5%">
-                    <button class="btn btn-outline-light text-dark border-0" onclick="mark_system_notification_as_read('{{ request.user.pk }}', '{{ n.id }}', this)" title="Done">
-                    <img src="{% static 'icons/check.svg' %}" width="21" height="21" />
-                    </button>
-                    </td>
-                </tr>
-                {% endwith %}
-            {% endfor %}
+            <h1>Unread Notifications</h1>
+            {% if notifications %}
+                <ul>
+                    {% for notification in notifications %}
+                        <li>
+                            {{ notification.actor }} {{ notification.verb }}
+                            <a href="{{ notification.target_url }}">{{ notification.target }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No unread notifications.</p>
+            {% endif %}
             </tbody>
         </table>
     </div>

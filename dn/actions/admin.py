@@ -1,5 +1,4 @@
 from django.contrib import admin
-from actions.models import resource
+from actions.models import resources
 
-
-admin.site.register(resource)
+admin.site.register(resources)

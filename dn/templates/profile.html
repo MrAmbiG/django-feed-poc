@@ -22,7 +22,7 @@
                             <td style="word-break: break-all;">{{ resource.created_at }}</td>
 
                             <td style="width: 5%">
-                                <a data-toggle="tooltip" title="delete" hx-delete="{% url 'resource_delete' resource.pk %}">
+                                <a data-toggle="tooltip" title="delete" hx-delete="{% url 'resource_delete' r_id=resource.pk pk=pk %}">
                                 <button type="button" class="btn btn-danger">delete</button>
                                 </a>
                             </td>
@@ -32,7 +32,7 @@
                     </tbody>
                 </table>
 
-                <a class="btn btn-outline-success" data-toggle="tooltip" data-bs-placement="bottom" title="provision" href="{% url 'resource_create' %}" role="button">
+                <a class="btn btn-outline-success" data-toggle="tooltip" data-bs-placement="bottom" title="provision" href="{% url 'resource_create' pk %}" role="button">
                 add resource</a>
 
             </div>

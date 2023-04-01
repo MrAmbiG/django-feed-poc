@@ -4,13 +4,13 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.views.generic.edit import CreateView
-from actions.models import resource
+from actions.models import resources
 # Create your views here.
-resource=resource
 
 class ResourceCreateView(CreateView):
-    model = resource
+    model = resources
     fields = ['resource']
+    template_name = "actions/resource_form.html"
     success_url = reverse_lazy("profile")
 
     def form_valid(self, form):
@@ -20,9 +20,9 @@ class ResourceCreateView(CreateView):
         return super().form_valid(form)
 
 @login_required
-def resourceDelete(request, pk):
+def resourceDelete(request, **kwargs):
     try:
-        item = resource.objects.get(pk=pk)
+        item = resources.objects.get(pk=kwargs['r_id'])
         item.delete()
     except Exception:
         item = None
@@ -30,4 +30,4 @@ def resourceDelete(request, pk):
 
 def resourceList(request, pk):
     user=User.objects.get(username=pk)
-    return resource.objects.filter(user=user)
+    return resources.objects.filter(user=user)
