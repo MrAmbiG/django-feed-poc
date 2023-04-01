@@ -2,11 +2,6 @@
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
-    {% if messages %}
-        {% for message in messages %}
-            <p>{{ message }}</p>
-        {% endfor %}
-    {% endif %}
 
 <div class="mx-auto card bg-light rounded" style="width:51rem;">
     <div class="jumbotron jumbotron-fluid">
