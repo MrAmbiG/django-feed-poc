@@ -2,8 +2,12 @@
 {% load notifications_tags %}
 {% notifications_unread as unread_count %}
 {% if unread_count %}
-    <i class="fa-solid fa-bell" style="color: #db6424;"></i>
+    <a href="{% url 'notifications_view' request.user.username %}">
+        <i class="fa-solid fa-bell" style="color: #ff0000;"></i>
+    </a>
 {% else %}
-    <i class="fa-regular fa-bell"></i>
+    <a href="{% url 'notifications_view' request.user.username %}">
+        <i class="fa-regular fa-bell" style="color: #000000;"></i>
+    </a>
 {% endif %}
 

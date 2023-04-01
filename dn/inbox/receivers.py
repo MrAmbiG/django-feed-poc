@@ -7,12 +7,13 @@ from django.utils import timezone
 
 @receiver(user_logged_in)
 def userLogin_handler(request, user, **kwargs):
-    notify.send(user, recipient=user, verb='you logged in', timestamp=timezone.now())
+    notify.send(user, recipient=user, verb='you logged in')
+
 
 @receiver(user_signed_up)
 def userSignup_handler(request, user, **kwargs):
-    notify.send(user, recipient=user, verb='you signed up', timestamp=timezone.now())
+    notify.send(user, recipient=user, verb='you signed up')
 
 @receiver(user_logged_out)
 def userLogout_handler(request, user, **kwargs):
-    notify.send(user, recipient=user, verb='you logged out', timestamp=timezone.now())
+    notify.send(user, recipient=user, verb='you logged out')
