@@ -19,4 +19,5 @@ admin - admin - (adminuser)
 - when a user is logged out, he gets a notification
 - When a user provisions a resource (vm, k8s, gpu, etc.,) he and his team admin/leader gets a notification
 - When a user deletes a resource he gets a notification
+- Ajax acknoledgement of notifications
 
