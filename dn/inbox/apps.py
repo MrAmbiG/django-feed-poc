@@ -7,3 +7,4 @@ class InboxConfig(AppConfig):
 
     def ready(self):
         import inbox.receivers
+        import inbox.signals
