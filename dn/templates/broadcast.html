@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<div class="mx-auto card bg-light rounded" style="width:51rem;">
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container">
+            <br>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input class="btn btn-sm border-success btn-light btn-c" type="submit" value="Send">
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

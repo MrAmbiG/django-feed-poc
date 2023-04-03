@@ -4,6 +4,7 @@ A POC for django notifications, feed with OOB solutions like django-notification
 ## users
 user1/2/3/4/5 - djangouser (regular users)
 admin - admin - (adminuser)
+django - staffuser - (staff user)
 ## Teams
 - perform this from admin panel
 |Team|admin|members|

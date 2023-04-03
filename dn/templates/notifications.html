@@ -11,6 +11,16 @@
         </div>
         <table class="table table-sm table-hover">
             <tbody>
+            {% if broadcaster %}
+            <tr>
+                <td>
+                    <a data-toggle="tooltip" data-bs-placement="bottom" title="broadcast" href="{% url 'broadcast' request.user.username %}" role="button">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    </a>
+                </td>
+            </tr>
+            {% endif %}
+
             <h1>Unread Notifications</h1>
             {% if notifications %}
                     {% comment %} {% for notification in notifications %} {% endcomment %}
