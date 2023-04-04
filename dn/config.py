@@ -4,6 +4,6 @@ PG_PASSWORD='U6FE-K48f-wu5BFU3RK8HM3esOjVT8Nh'
 PG_HOST='satao.db.elephantsql.com'
 PG_PORT=''
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gajuambee'
+EMAIL_HOST_USER = 'gmailuser'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = False
