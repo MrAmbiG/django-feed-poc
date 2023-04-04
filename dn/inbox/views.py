@@ -15,23 +15,53 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy, reverse
 from notifications.signals import notify
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import send_mail
 
 # Create your views here.
 @login_required
-def adminBroadcast(request, team_qs, message):
-    try:
-        for team in team_qs:
-            receivers = team.members.all()
-            for receiver in receivers:
-                notify.send(request.user, recipient=receiver, verb=message)
-    except Exception as e:
-        print(e)
+def adminBroadcast(request, message, alert_type):
+    if alert_type == "notification":
+        try:
+            team_qs = request.user.admin_teams.all()
+            for team in team_qs:
+                receivers = team.members.all()
+                for receiver in receivers:
+                    notify.send(request.user, recipient=receiver, verb=message)
+        except Exception as e:
+            print(e)
+
+    if alert_type == "email":
+        try:
+            team_qs = request.user.admin_teams.all()
+            for team in team_qs:
+                receivers = team.members.all()
+                for receiver in receivers:
+                    send_mail(
+                        'Devcloud message',
+                        message,
+                        request.user.email,
+                        [receiver.email],
+                        fail_silently=False,
+                    )
+        except Exception as e:
+            print(e)
 
 @login_required
-def staffBroadcast(request, message):
-    receivers = User.objects.all()
-    for receiver in receivers:
-        notify.send(request.user, recipient=receiver, verb=message)
+def staffBroadcast(request, message, alert_type):
+    if alert_type == "notification":
+        receivers = User.objects.all()
+        for receiver in receivers:
+            notify.send(request.user, recipient=receiver, verb=message)
+    if alert_type == "email":
+        receivers = User.objects.all()
+        for receiver in receivers:
+            send_mail(
+                'Devcloud message',
+                message,
+                request.user.email,
+                [receiver.email],
+                fail_silently=False,
+            )
 
 
 class BroadcastCreateView(CreateView, LoginRequiredMixin):
@@ -55,11 +85,11 @@ class BroadcastCreateView(CreateView, LoginRequiredMixin):
         instance = form.save(commit=False)
         instance.broadcaster = self.request.user
         message = instance.message
+        alert_type = instance.type
         if self.request.user.is_staff:
-            staffBroadcast(self.request, message)
+            staffBroadcast(self.request, message, alert_type)
         else:
-            team_qs = self.request.user.admin_teams.all()
-            adminBroadcast(self.request, team_qs, message)
+            adminBroadcast(self.request, message, alert_type)
         instance.save()
         return super().form_valid(form)
 
