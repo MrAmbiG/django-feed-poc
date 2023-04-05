@@ -1,9 +1,0 @@
-PG_NAME=''
-PG_USER=''
-PG_PASSWORD='U'
-PG_HOST=''
-PG_PORT=''
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gmailuser'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = False
