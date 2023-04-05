@@ -19,11 +19,11 @@ admin - admin - (adminuser)
 django - staffuser - (staff user)
 ## Teams
 - perform this from admin panel <br>
-|Team|admin|members|
-|---|---|---|
-|admin|admin|admin, All|
-|user1|user1|user1, user2, user3|
-|user4|user4|user4, user5|
+
+|Header1 |Header2  | Header3|
+--- | --- | ---|
+|data1|data2|data3|
+|data11|data12|data13|
 
 ## Test
 - Bell icon on navbar is red when there are unread notification
