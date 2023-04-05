@@ -5,8 +5,6 @@ from django.dispatch import receiver
 from django.utils import timezone
 from users.models import Team
 
-
-
 @receiver(user_logged_in)
 def userLogin_handler(request, user, **kwargs):
     notify.send(user, recipient=user, verb='you logged in')

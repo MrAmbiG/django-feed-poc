@@ -18,6 +18,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
 
 # Create your views here.
+
 @login_required
 def adminBroadcast(request, message, alert_type):
     if alert_type == "notification":
