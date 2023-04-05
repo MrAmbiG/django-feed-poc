@@ -21,9 +21,9 @@ django - staffuser - (staff user)
 - perform this from admin panel
 |Team|admin|members|
 |---|---|---|
-|admin|admin|admin <br> All|
-|user1|user1|user1 <br> user2 <br> user3|
-|user4|user4|user4 <br> user5|
+|admin|admin|admin, All|
+|user1|user1|user1, user2, user3|
+|user4|user4|user4, user5|
 
 ## Test
 - Bell icon on navbar is red when there are unread notification
