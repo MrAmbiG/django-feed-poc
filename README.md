@@ -18,7 +18,7 @@ user1/2/3/4/5 - djangouser (regular users)
 admin - admin - (adminuser)
 django - staffuser - (staff user)
 ## Teams
-- perform this from admin panel
+- perform this from admin panel <br>
 |Team|admin|members|
 |---|---|---|
 |admin|admin|admin, All|
