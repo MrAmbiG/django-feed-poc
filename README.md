@@ -13,6 +13,7 @@ A POC for django notifications, feed with OOB solutions like django-notification
     - EMAIL_HOST_USER = ''
     - EMAIL_PORT = 587 # whatever that is relevant in your case
     - EMAIL_USE_TLS = False # or True
+ - I use free tier elephantsql for all my postgresql needs and such tests and validation. Not a sponsor but a suggestion
 ## users
 user1/2/3/4/5 - djangouser (regular users)
 admin - admin - (adminuser)
