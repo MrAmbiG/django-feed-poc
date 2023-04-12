@@ -45,7 +45,3 @@ def resourceDelete_handler(sender, resource, **kwargs):
             notify.send(sender, recipient=admin, verb=f'{sender} deleted {resource}')
     except Exception as e:
         print(e)
-
-# @receiver(post_save, sender=ApiNotify)
-# def apiNotify(sender, instance, created, **kwargs):
-#     notify.send(instance.sender, recipient=instance.receiver, verb=f'{instance.message}')
