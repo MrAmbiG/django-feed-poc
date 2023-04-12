@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     "widget_tweaks",
     'notifications',
+    'rest_framework',
     # local
     'users',
     'actions',
@@ -99,7 +100,7 @@ DATABASES = {
        'USER': PG_USER,
        'PASSWORD': PG_PASSWORD,
        'HOST': PG_HOST,
-       'PORT': PG_PORT,
+    #    'PORT': PG_PORT,
    }
 }
 
@@ -153,6 +154,6 @@ ACCOUNT_LOGOUT_ON_GET = True
 # sendgrid email settings
 EMAIL_HOST = EMAIL_HOST
 EMAIL_HOST_USER = EMAIL_HOST_USER
-EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD", default=None)
+EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_PORT = 587
 EMAIL_USE_TLS = False

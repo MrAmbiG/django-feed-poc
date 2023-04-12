@@ -1,7 +1,9 @@
 from allauth.account.signals import user_logged_in, user_signed_up, user_logged_out
 from inbox import signals
+from inbox.models import ApiNotify
 from notifications.signals import notify
 from django.dispatch import receiver
+from django.db.models.signals import post_save
 from django.utils import timezone
 from users.models import Team
 
@@ -43,3 +45,7 @@ def resourceDelete_handler(sender, resource, **kwargs):
             notify.send(sender, recipient=admin, verb=f'{sender} deleted {resource}')
     except Exception as e:
         print(e)
+
+# @receiver(post_save, sender=ApiNotify)
+# def apiNotify(sender, instance, created, **kwargs):
+#     notify.send(instance.sender, recipient=instance.receiver, verb=f'{instance.message}')

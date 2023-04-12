@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from notifications.models import Notification
 from inbox.forms import BroadcastForm
-from inbox.models import Messages
+from inbox.models import Messages, ApiNotify
 from users.models import Team
 from django.shortcuts import render
 from django.contrib.auth.models import User
@@ -63,7 +63,6 @@ def staffBroadcast(request, message, alert_type):
                 [receiver.email],
                 fail_silently=False,
             )
-
 
 class BroadcastCreateView(CreateView, LoginRequiredMixin):
     model = Messages
@@ -129,4 +128,44 @@ def notification_read(request, pk, n_id):
     notice.save()
     data = {'success': True}
     return JsonResponse(data)
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from inbox.serializers import NotifyApiSerializer
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework import status, viewsets
+
+from django.shortcuts import get_object_or_404
+
+class Notify(viewsets.ModelViewSet):
+    # define queryset
+    queryset = ApiNotify.objects.all()
+
+    # specify serializer to be used
+    serializer_class = NotifyApiSerializer
+
+    def perform_create(self, serializer):
+        # set the sender field to the current user
+        serializer.validated_data['sender'] = self.request.user
+        message = serializer.validated_data['message']
+        sender = User.objects.get(username=self.kwargs['pk'])
+
+        # get the receiver username or primary key value from the validated data
+        receiver = serializer.validated_data.get('receiver')
+
+        # check if the receiver value is a string (username)
+        if isinstance(receiver, str):
+            # look up the User object by username
+            receiver = get_object_or_404(User, username=receiver)
+
+            # set the receiver field to the User object
+            serializer.validated_data['receiver'] = receiver
+
+        notify.send(sender, recipient=receiver, verb=f'{message}')
+
+        # save the instance
+        # serializer.save()
+
 

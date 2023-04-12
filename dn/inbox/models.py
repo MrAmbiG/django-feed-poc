@@ -1,6 +1,8 @@
 from django.db import models
 from django.conf import settings
 from users.models import Team
+from django.contrib.auth.models import User
+from django.db import models
 
 # Create your models here.
 BROADCAST_TYPE_CHOICES = (
@@ -32,4 +34,15 @@ class Messages(models.Model):
 
     def __str__(self):
         return f"{self.broadcaster} ({self.type})"
+
+
+
+class ApiNotify(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sender')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE,related_name='receiver')
+    message = models.TextField()
+
+    def __str__(self):
+        return f'{self.sender.username} -{self.receiver.username}: {self.message}'
+
 
